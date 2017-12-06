@@ -1,8 +1,14 @@
 CREATE DATABASE famescrape;
 USE famescrape;
 
+
 CREATE TABLE celebs (
 id INT AUTO_INCREMENT NOT NULL,
 name VARCHAR(60) NOT NULL,
 PRIMARY KEY (id)
+);
+
+CREATE TABLE userinfo (
+id INT AUTO_INCREMENT,
+
 );
