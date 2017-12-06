@@ -1,41 +1,43 @@
-var request = require("request");
+var db = [
+	{
+		name: 'Denzel Washington',
+		dislikes: 0,
+		likes: 0,
+		image: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjE5NDU2Mzc3MV5BMl5BanBnXkFtZTcwNjAwNTE5OQ@@._V1_UY1200_CR135,0,630,1200_AL_.jpg'
+	},
+	{
+		name: 'Keanu Reeves',
+		dislikes: 0,
+		likes: 0,
+		image: 'https://imgix.ranker.com/user_node_img/50013/1000250501/original/keanu-reeves-doesn-t-want-your-money-all-people-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces'
+	},
+	{
+		name: 'Mark Walhberg',
+		dislikes: 0,
+		likes: 0,
+		image: 'https://images -na.ssl-images-amazon.com/images/M/MV5BMjE1MjYwNTE2M15BMl5BanBnXkFtZTYwNTI0NjI1._V1_UX214_CR0,0,214,317_AL_.jpg'
+	}
+];
 
-var nodeArgs = process.argv;
-
-var actorName = "Brad Pitt"; 
-// Loop through all the words in the node argument
-// And do a little for-loop magic to handle the inclusion of "+"s
-for (var i = 2; i < nodeArgs.length; i++) {
-  if (i > 2 && i < nodeArgs.length) {
-    actorName = actorName + "+" + nodeArgs[i];
-  }
-  else {
-    actorName += nodeArgs[i];
-  }
+function loadCelebs() {
+	for ( var i = 0; i < db.length; i++ ) {
+		// console.log(db[i].image)
+		$('.celebs').append(
+			'<div class="celeb">' +
+  			'<div class="image">' +
+  				'<img src="' + db[i].image + '" alt="">' +
+  			'</div>' +
+  			'<h3>' + db[i].name + '</h3>' +
+  			'<div class="info">' +
+  				'<span>Likes: ' + db[i].likes + '</span>' +
+    			'<span>Dislikes: ' + db[i].dislikes + '</span>' +
+  			'</div>' +
+  			'<button>Like</button>' +
+  			'<button>Dislike</button>' +
+  		'</div>'
+		);
+	}
 }
 
-var queryUrl = "https://theimdbapi.org/api/find/person?name=" + actorName; 
+loadCelebs();
 
-request(queryUrl, function(error, response, body) {
-
-  // If the request is successful
-  if (!error && response.statusCode === 200) {
-
-    // Parse the body of the site and recover just the imdbRating
-    // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-    console.log(JSON.parse(body)[0].image.poster);
-  }
-});
-
-//module.exports = ratings;
-
-
-//actor array counter
-
-
-// Grabbing text the user typed into the search input
-//Use this line of code when adding new actors 
-
-
-//grab pick from api 
-//display
