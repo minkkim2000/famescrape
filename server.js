@@ -1,10 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-
-// ==============================================================================
-// EXPRESS CONFIGURATION
-// This sets up the basic properties for our express server
-// ==============================================================================
+var passport 			 = require("./config/passport");
 
 // Tells node that we are creating an "express" server
 var app = express();
@@ -25,3 +21,8 @@ require("./routes/html-Routes")(app);
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
 });
+
+app.use(session({ secret: config.sessionKey, resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(authCheck);
