@@ -1,8 +1,8 @@
 // Dependencies
-var Sequelize = require("sequelize");
+const Sequelize = require("sequelize");
 
 // Creates mySQL connection using Sequelize
-var sequelize = new Sequelize("starwars", "root", "password", {
+const sequelize = new Sequelize("famescrape", "root", "password", {
   host: "localhost",
   dialect: "mysql",
   pool: {
