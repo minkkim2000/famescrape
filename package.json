@@ -23,6 +23,7 @@
     "express-handlebars": "^3.0.0",
     "mysql": "^2.15.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "mysql2": "^1.5.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -30,5 +31,9 @@
 =======
     "mysql2": "^1.5.1"
 >>>>>>> 8f71e8c5d2bea52674abc4389773e4f7353440dc
+=======
+    "mysql2": "^1.5.1",
+    "request": "^2.83.0"
+>>>>>>> 65e084e6fdd93dfce9a05b34e92cc9c28c964015
   }
 }
