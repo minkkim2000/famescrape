@@ -22,9 +22,13 @@
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
     "mysql": "^2.15.0",
+<<<<<<< HEAD
     "mysql2": "^1.5.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "sequelize": "^4.27.0"
+=======
+    "mysql2": "^1.5.1"
+>>>>>>> 8f71e8c5d2bea52674abc4389773e4f7353440dc
   }
 }
