@@ -75,7 +75,7 @@ for (var i = 2; i < nodeArgs.length; i++) {
   }
 }
 
-// Then run a request to the OMDB API with the movie specified
+// Then run a request to the IMDB API with the movie specified
 var queryUrl = "http://www.theimdbapi.org/api/find/person?name=" + actorName;
 
 // This line is just to help us debug against the actual URL.
