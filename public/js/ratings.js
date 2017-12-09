@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 
 
-// Include the request npm package (Don't forget to run "npm install request" in this folder first!)
+// Include the request npm package 
 var request = require("request");
 
 // Store all of the arguments in an array

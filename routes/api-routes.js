@@ -1,79 +1,49 @@
-// Requiring our models
-const db = require("../models")
-var Celeb = require("../models/celebs.js");
+var db = require("../models");
 
-// Routes
-// =============================================================
 module.exports = function(app) {
-
     // Search for Specific celeb (or all celebs) then provides JSON
     app.get("/api/:celebs?", function(req, res) {
         // Then display the JSON for ONLY that celeb.
-        Celeb.findOne({
+        db.Actor.findOne({
             where: {
                 routeName: req.params.celebs
             }
-        }).then(function(result) {
-            return res.json(result);
+        }).then(function(dbActor) {
+            return res.json(dbActor);
         });
     });
 
-    // Get route for retrieving a single post
-    app.get("/api/posts/:id", function(req, res) {
-        db.Post.findOne({
-                where: {
-                    id: req.params.id
-                }
-            })
-            .then(function(result) {
-                res.json(result);
-            });
-    });
-
-    // If a user sends data to add a new celebrities...
-    app.post("/api/new", function(req, res) {
+    // POST route for saving a new todo
+    app.post("/api/celebs", function(req, res) {
         var celeb = req.body;
         var routeName = celeb.name.replace(/\s+/g, "").toLowerCase();
-
-        // Then add the celeb to the database using sequelize
-        Celeb.create({
+        // create takes an argument of an object describing the item we want to
+        // insert into our table. In this case we just we pass in an object with a text
+        // and complete property
+        db.Actor.create({
             routeName: routeName,
-            name: celeb.name,
+            name: req.body.name,
+            valid: req.body.valid
+        }).then(function(dbActor) {
+            // We have access to the new todo as an argument inside of the callback function
+            res.json(dbActor);
         });
-
     });
 
-
-    // GET route for getting all of the posts
-    app.get("/api/posts/", function(req, res) {
-        db.Post.findAll({})
-            .then(function(result) {
-                res.json(result);
-            });
+    // PUT route for updating celebs. We can get the updated todo data from req.body
+    app.put("/api/celebs", function(req, res) {
+        // Update takes in an object describing the properties we want to update, and
+        // we use where to describe which objects we want to update
+        db.Actor.update({
+            name: req.body.name,
+            valid: req.body.valid
+        }, {
+            where: {
+                id: req.body.id
+            }
+        }).then(function(dbActor) {
+            res.json(dbActor);
+        });
     });
 
-    // POST route for saving a new post
-    app.post("/api/posts", function(req, res) {
-        console.log(req.body);
-        db.Post.create({
-                like: req.body.like,
-                dislike: req.body.dislike,
-                whoThat: req.body.whoThat
-            })
-            .then(function(result) {
-                res.json(result);
-            });
-    });
-
-    // PUT route for updating posts
-    app.put("/api/posts", function(req, res) {
-        db.Post.update(req.body, {
-                where: {
-                    id: req.body.id
-                }
-            })
-            .then(function(result) {
-                res.json(result);
-            });
-    });
 };
