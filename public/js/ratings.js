@@ -46,40 +46,57 @@ $(document).ready(function() {
     }
   });
 
-  // Submits a new post and brings user to blog page upon completion
-  function submitPost(Post) {
-    $.post("/api/posts/", Post, function() {
-      window.location.href = "/blog";
-    });
+
+
+
+// Include the request npm package (Don't forget to run "npm install request" in this folder first!)
+var request = require("request");
+
+// Store all of the arguments in an array
+var nodeArgs = process.argv;
+
+// Create an empty variable for holding the movie name
+var actorName = "";
+
+// Loop through all the words in the node argument
+// And do a little for-loop magic to handle the inclusion of "+"s
+for (var i = 2; i < nodeArgs.length; i++) {
+
+  if (i > 2 && i < nodeArgs.length) {
+
+    actorName = actorName + "+" + nodeArgs[i];
+
   }
 
-  // Gets post data for a post if we're editing
-  function getPostData(id) {
-    $.get("/api/posts/" + id, function(data) {
-      if (data) {
-        // If this post exists, prefill our cms forms with its data
-        titleInput.val(data.title);
-        bodyInput.val(data.body);
-        postCategorySelect.val(data.category);
-        // If we have a post with this id, set a flag for us to know to update the post
-        // when we hit submit
-        updating = true;
-      }
-    });
-  }
+  else {
 
-  // Update a given post, bring user to the blog page when done
-  function updatePost(post) {
-    $.ajax({
-      method: "PUT",
-      url: "/api/posts",
-      data: post
-    })
-    .done(function() {
-      window.location.href = "/blog";
-    });
+    actorName += nodeArgs[i];
+
+  }
+}
+
+// Then run a request to the OMDB API with the movie specified
+var queryUrl = "http://www.theimdbapi.org/api/find/person?name=" + actorName;
+
+// This line is just to help us debug against the actual URL.
+console.log(queryUrl);
+
+request(queryUrl, function(error, response, body) {
+
+  // If the request is successful
+  if (!error && response.statusCode === 200) {
+
+    // Parse the body of the site and recover just the imdbRating
+    console.log("Actor Name: " + JSON.parse(body).title);
+    console.log(JSON.parse(body).image poster);
+
   }
 });
+
+
+
+
+
 
 
 function loadCelebs() {
