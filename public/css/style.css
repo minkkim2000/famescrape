@@ -9,7 +9,8 @@ html {
 
 body {
   background-image: url("../img/login.png");
-  font-family: 'Titillium Web', sans-serif;
+  font-family: sans-serif;
+  color: #777;
   height: 100%;
 }
 
@@ -30,6 +31,14 @@ a:hover {
   margin: 40px auto;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+.title {
+  font-size: 80px;
+  font-weight: 200px;
+  color: grey;
+	font-family: sans-serif;
+  text-align: center;
+  display: block;
 }
 
 .tab-group {
