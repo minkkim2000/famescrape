@@ -1,3 +1,14 @@
 DROP DATABASE IF EXISTS famescrape;
 
 CREATE DATABASE famescrape;
+
+USE famescrape;
+
+CREATE TABLE user (
+  id INT AUTO_INCREMENT,
+  firstname VARCHAR(250) NOT NULL,
+  lastname VARCHAR(250) NOT NULL,
+  password VARCHAR(500) NOT NULL,
+  email VARCHAR(500) NOT NULL,
+  PRIMARY KEY(id)
+);
