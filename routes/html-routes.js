@@ -26,7 +26,7 @@ module.exports = function(app) {
 
   module.exports = app;
 
-  app.get("/profile", function(req, res) {
+  app.get("/search", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/profile.html"));
   });
 
@@ -36,8 +36,8 @@ module.exports = function(app) {
   });
 
 
-  app.get("/analytics", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/analytics.html"));
+  app.get("/user_settings", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/settings.html"));
   });
 
 };
