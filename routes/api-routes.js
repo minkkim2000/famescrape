@@ -1,6 +1,15 @@
 var db = require("../models");
 
 module.exports = function(app) {
+
+    app.get("/api/:id?", function(req, res) {
+        // Then display the JSON for ONLY that id.
+        db.Actor.findOne({
+            order: 'rand()'
+        }).then(function(dbActor) {
+            return res.json(dbActor);
+        });
+    });
     // Search for Specific celeb (or all celebs) then provides JSON
     app.get("/api/:name?", function(req, res) {
         // Then display the JSON for ONLY that celeb.
