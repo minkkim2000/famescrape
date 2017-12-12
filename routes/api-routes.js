@@ -1,3 +1,13 @@
+// *********************************************************************************
+// api-routes.js - this file offers a set of routes for displaying and saving data to the db
+// *********************************************************************************
+// Basically routes our client side REQUESTS to the server to GET/POST/PUT/DELETE data from client side to database server
+
+// Dependencies
+// =============================================================
+
+// Requiring our Todo models
+
 var db = require("../models");
 
 module.exports = function(app) {

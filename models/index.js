@@ -1,3 +1,5 @@
+// HERE WE INSTANTIATE SEQUELIZE
+
 'use strict';
 
 var fs        = require('fs');

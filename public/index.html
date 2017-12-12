@@ -1,119 +1,136 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-	    <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <title>FameScrape</title>
-	    <link rel="stylesheet" href="css/style.css">
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>FameScrape</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</head>
 
-	<body>
-	    <strong><h1 class="title">FameScrape</h1></strong>
-	    <header id="header">
-	        <nav></nav>
-	    </header>
-	    <!-- /header -->
-	    <div class="container">
-	        <div class="form">
-	            <ul class="tab-group">
-	                <li class="tab active"><a href="#signup">Sign Up</a></li>
-	                <li class="tab"><a href="profile.html">Log In</a></li>
-	            </ul>
-	            <div class="tab-content">
-	                <div id="signup">
-	                    <h1>Sign Up for Free</h1>
-	                    <form action="/" method="post">
-	                        <div class="top-row">
-	                            <div class="field-wrap">
-	                                <label>
-	                                    First Name<span class="req">*</span>
-	                                </label>
-	                                <input type="text" required autocomplete="off" />
-	                            </div>
-	                            <div class="field-wrap">
-	                                <label>
-	                                    Last Name<span class="req">*</span>
-	                                </label>
-	                                <input type="text" required autocomplete="off" />
-	                            </div>
-	                        </div>
-	                        <div class="field-wrap">
-	                            <label>
-	                                Age<span class="req">*</span>
-	                            </label>
-	                            <input type="text" required autocomplete="off" />
-	                        </div>
-	                        <div class="field-wrap">
-	                            <label for="gender" class="gender"></label>
-	                            <select class="field-select" id="gender">
-	                                <option>Select Gender<span class="req">*</span></option>
-	                                <option>Male</option>
-	                                <option>Female</option>
-	                            </select>
-	                        </div>
-	                        <div class="field-wrap">
-	                            <label for="race" class="race"></label>
-	                            <select class="field-select" id="race">
-	                                <option>Select Race/Ethnicity<span class="req">*</span></option>
-	                                <option>American Indian or Alaska Native</option>
-	                                <option>Asian</option>
-	                                <option>Black or African American</option>
-	                                <option>Hispanic or Latino</option>
-	                                <option>Native Hawaiian or Other Pacific Islander</option>
-	                                <option>White</option>
-	                            </select>
-	                        </div>
-	                        <div class="field-wrap">
-	                            <label>
-	                                Location<span class="req">*</span>
-	                            </label>
-	                            <input type="text" autocomplete="off" />
-	                        </div>
-	                        <div class="field-wrap">
-	                            <label>
-	                                Email Address<span class="req">*</span>
-	                            </label>
-	                            <input type="email" required autocomplete="off" />
-	                        </div>
-	                        <div class="field-wrap">
-	                            <label>
-	                                Set A Password<span class="req">*</span>
-	                            </label>
-	                            <input type="password" required autocomplete="off" />
-	                        </div>
-							<!-- <button type="submit" class="button button-block" />Get Started</button> -->
-							<a href="profile.html" button type="submit" class="button button-block"/>Get Started</button></a>
-	                    </form>
-	                </div>
-	                <div id="login">
-	                    <!-- <h1>Welcome Back!</h1>
-	                    <form action="/" method="post">
-	                        <div class="field-wrap">
-	                            <label>
-	                                Email Address<span class="req">*</span>
-	                            </label>
-	                            <input type="email" required autocomplete="off" />
-	                        </div>
-	                        <div class="field-wrap">
-	                            <label>
-	                                Password<span class="req">*</span>
-	                            </label>
-	                            <input type="password" required autocomplete="off" />
-	                        </div>
-	                        <p class="forgot"><a href="#">Forgot Password?</a></p>
-	                        <button class="button button-block" />Log In</button>
-	                    </form> -->
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	    <footer>&copy; Copyright 2017 FameScrape</footer>
+<body>
+    <strong><h1 class="title">FameScrape</h1></strong>
+    <header id="header">
+        <nav></nav>
+    </header>
+    <!-- /header -->
+    <div class="container">
+        <div class="form">
+            <ul class="tab-group">
+                <li class="tab active"><a href="#signup">Sign Up</a></li>
+                <li class="tab"><a href="#login">Log In</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="signup">
+                    <h1>Sign Up for Free</h1>
+                    <form action="/" method="post">
+                        <div class="field-wrap">
+                            <label>
+                                User Name<span class="req">*</span>
+                            </label>
+                            <input type="username" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap">
+                            <label>
+                                Email Address<span class="req">*</span>
+                            </label>
+                            <input type="email" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap">
+                            <label>
+                                Set A Password<span class="req">*</span>
+                            </label>
+                            <input type="password" required autocomplete="off" />
+                        </div>
+                        <div class="top-row">
+                            <div class="field-wrap">
+                                <label>
+                                    First Name
+                                </label>
+                                <input type="text" required autocomplete="off" />
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Last Name
+                                </label>
+                                <input type="text" required autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="field-wrap">
+                            <label for="age" class="age"></label>
+                            <select class="field-select" id="age">
+                                <option>Select Age<span class="req">*</span></option>
+                                <option>Under 12 years old</option>
+                                <option>12-17 years old</option>
+                                <option>18-24 years old</option>
+                                <option>25-34 years old</option>
+                                <option>35-44 years old</option>
+                                <option>45-54 years old</option>
+                                <option>55-64 years old</option>
+                                <option>65-74 years old</option>
+                                <option>75 years or older</option>
+                            </select>
+                        </div>
+                        <div class="field-wrap">
+                            <label for="gender" class="gender"></label>
+                            <select class="field-select" id="gender">
+                                <option>Select Gender<span class="req">*</span></option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                        <div class="field-wrap">
+                            <label for="race" class="race"></label>
+                            <select class="field-select" id="race">
+                                <option>Select Race/Ethnicity<span class="req">*</span></option>
+                                <option>American Indian or Alaska Native</option>
+                                <option>Asian</option>
+                                <option>Black or African American</option>
+                                <option>Hispanic or Latino</option>
+                                <option>Native Hawaiian or Other Pacific Islander</option>
+                                <option>White</option>
+                            </select>
+                        </div>
+                        <div class="field-wrap">
+                            <label>
+                                Location
+                            </label>
+                            <input type="text" autocomplete="off" />
+                        </div>
+                        <button type="submit" class="button button-block" />Get Started</button>
+                    
+                    </form>
+                </div>
+                <div id="login">
+                    <h1>Welcome Back!</h1>
+                    <form action="/" method="post">
+                        <div class="field-wrap">
+                            <label>
+                                Email Address<span class="req">*</span>
+                            </label>
+                            <input type="email" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap">
+                            <label>
+                                Password<span class="req">*</span>
+                            </label>
+                            <input type="password" required autocomplete="off" />
+                        </div>
+                        <p class="forgot"><a href="#">Forgot Password?</a></p>
+                        <button class="button button-block" />Log In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-	    <script src="js/index.js"></script>
-	</body>
+
+
+    <footer><center>&copy; Copyright 2017 FameScrape</center></footer>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="js/index.js"></script>
+</body>
 
 </html>
