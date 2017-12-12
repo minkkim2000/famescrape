@@ -1,13 +1,13 @@
 module.exports = function(sequelize, DataTypes) {
   var Post = sequelize.define("Post", {
     like: {
-      type: DataTypes.STRING,
+      type: DataTypes.INT,
     },
     dislike: {
-      type: DataTypes.STRING,
+      type: DataTypes.INT,
     },
     whoThat: {
-      type: DataTypes.STRING,
+      type: DataTypes.INT,
     }
   });
   return Post;

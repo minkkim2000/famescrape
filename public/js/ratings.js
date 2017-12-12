@@ -1,110 +1,122 @@
 $(document).ready(function() {
-            // Gets an optional query string from our url (i.e. ?post_id=23)
-            var url = window.location.search;
-            var postId;
-            // Sets a flag for whether or not we're updating a post to be false initially
-            var updating = false;
+    // Adding event listeners for deleting, editing, and adding todos
+    $(document).on("click", "button.dislike", dislike);
+    $(document).on("click", "button.whoThat", who);
+    $(document).on("click", "button.like", like);
 
-            // If we have this section in our url, we pull out the post id from the url
-            // In localhost:8080/ratigs?post_id=1, postId is 1
-            if (url.indexOf("?post_id=") !== -1) {
-                postId = url.split("=")[1];
-                getPostData(postId);
-            }
+
+
+    function loadCelebs() {
+        for (var i = 0; i < db.length; i++) {
+            // console.log(db[i].image)
+            $('.celebs').append(
+               '<div class="celeb">' +
+                '<div class="image">' +
+                '<img src="' + db[i].image + '" alt="">' +
+                '</div>' +
+                '<h3>' + db[i].name + '</h3>' +
+                '</div>'
+            );
         }
-        // Getting jQuery references to the post like, dislike, whoThat
-        var like = $("#like");
-        var dislike = $("#dislike");
-        var whoThat = $("#whoThat");
-        // Adding an event listener for when the form is submitted
-        $(cmsForm).on("submit", function handleFormSubmit(event) {
-            event.preventDefault();
+    }
 
-            // Constructing a newPost object to hand to the database
-            var newPost = {
-                like: likeInput.val().trim(),
-                dislike: dislikeInput.val().trim(),
-                whoThat: whoThatInput.val().trim()
-            };
+    loadCelebs();
 
-            console.log(newPost);
+    // when user hits the search-btn
+    $("#search-btn").on("click", function() {
 
-            // If we're updating a post run updatePost to update a post
-            // Otherwise run submitPost to create a whole new post
-            if (updating) {
-                newPost.id = postId;
-                updatePost(newPost);
-            } else {
-                submitPost(newPost);
+    // save the actor they typed into the actor-search input
+    var searchedActor = $("#actor-search").val().trim();
+
+    searchedActor = searchedActor.replace(/\s+/g, "").toLowerCase();
+
+    // run an AJAX GET-request for our servers api,
+        // including the user's actor in the url
+        $.get("/api/" + searchedActor, function(data) {
+            // log the data to our console
+            console.log(data);
+            //empty to photo before adding new content
+            $("#photo").empty();
+            // if the data is not there, then return an error message
+            if (!data) {
+                $("#photo").append("<h2> Information not available. Please confirm actor/actress</h2>");
+            }
+            // otherwise
+            else {
+                function getPoster(title) {
+                    $.getJSON("http://www.theimdbapi.org/api/find/person?name=" + title, function(data) {
+                        var items = [];
+
+                        $.each(data, function(key, val) {
+                            items.push('<li id="' + key + '">' + val + '</li>');
+                        });
+
+                        $("<ul>", {
+                            "class": "newCeleb",
+                            html: items.join("")
+                        }).appendTo("body");
+                    })
+                }.then {
+                    $("#photo").append("<h2>" + data.title + "</h2>");
+                }
             }
         });
+    });
 
-        // Include the request npm package 
-        var request = require("request");
 
-        // Store all of the arguments in an array
-        var nodeArgs = process.argv;
+    function LikeDislike(element, options) {
+        this.element = element;
+        this.opts = $.extend({}, defaults, options);
+        this.init();
+    };
 
-        // Create an empty variable for holding the movie name
-        var actorName = "";
 
-        // Loop through all the words in the node argument
-        // And do a little for-loop magic to handle the inclusion of "+"s
-        for (var i = 2; i < nodeArgs.length; i++) {
-
-            if (i > 2 && i < nodeArgs.length) {
-
-                actorName = actorName + "+" + nodeArgs[i];
-
-            } else {
-
-                actorName += nodeArgs[i];
-
-            }
+    $("#rating").likeDislike();
+    $("#rating").likeDislike({
+        click: function(btnType, likes, dislikes, event) {
+        var likesElem = $(this).find(".likes");
+        var dislikesElem = $(this).find(".dislikes");
+        likesElem.text(parseInt(likesElem.text()) + likes);
+        dislikesElem.text(parseInt(dislikesElem.text()) + dislikes);
         }
+    });
 
-        // Then run a request to the IMDB API with the movie specified
-        var queryUrl = "http://www.theimdbapi.org/api/find/person?name=" + actorName;
+    $("#rating").likeDislike({
+        reverseMode: true;
+        activeBtn: localStorage["key"] ? localStorage["key"] : "",
+        click: function(btnType, likes, dislikes, event) {
+        var self = this;
 
-        // This line is just to help us debug against the actual URL.
-        console.log(queryUrl);
+        // lock buttons
+        self.readOnly(true);
 
-        request(queryUrl, function(error, response, body) {
+            // send data to server
+            $.ajax({
+                url: "url",
+                type: "GET",
+                data: "id=1" + "&likes=" + likes + "&dislikes=" + dislikes,
+                success: function(data) {
+                // show new values
+                    $(self).find(".likes").text(data.likes);
+                    $(self).find(".dislikes").text(data.dislikes);
+                    localStorage["key"] = btnType;
 
-            // If the request is successful
-            if (!error && response.statusCode === 200) {
+                    // unlock the buttons
+            self.readOnly(false);
+                }
+            });
+        }
+    });
 
-                // Parse the body of the site and recover just the imdbRating
-                console.log("Actor Name: " + JSON.parse(body).title);
-                console.log(JSON.parse(body).image poster);
-
-            }
-        });
-
-
-
-
-
-
-
-        // function loadCelebs() {
-        // 	for ( var i = 0; i < db.length; i++ ) {
-        // 		// console.log(db[i].image)
-        // 		$('.celebs').append(
-        // 			'<div class="celeb">' +
-        //   			'<div class="image">' +
-        //   				'<img src="' + db[i].image + '" alt="">' +
-        //   			'</div>' +
-        //   			'<h3>' + db[i].name + '</h3>' +
-        //   			'<div class="info">' +
-        //   				'<span>Likes: ' + db[i].likes + '</span>' +
-        //     			'<span>Dislikes: ' + db[i].dislikes + '</span>' +
-        //   			'</div>' +
-        //   			'<button>Like</button>' +
-        //   			'<button>Dislike</button>' +
-        //   		'</div>'
-        // 		);
-        // 	}
-        // }
-
-        // loadCelebs();
+    $("#rating").likeDislike({
+        click: null, // callback
+        beforeClick: null, // callback
+        initialValue: 0,
+        reverseMode: false,
+        readOnly: false,
+        likeBtnClass: "like",
+        dislikeBtnClass: "dislike",
+        activeClass: "active",
+        disableClass: "disable"
+    });
+};
