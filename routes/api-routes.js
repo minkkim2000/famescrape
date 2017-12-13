@@ -13,7 +13,7 @@ var db = require("../models");
 module.exports = function(app) {
   // GET route for getting all of the celebs
   app.get("/api/celebs", function(req, res) {
-    // findAll returns all entries for a table when used with no options
+    // findAll returns all entries for a table when used with no options/
     db.Actor.findAll({}).then(function(dbActor) {
       // We have access to the celebs as an argument inside of the callback function
       res.json(dbActor);
